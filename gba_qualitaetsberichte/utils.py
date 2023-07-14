@@ -23,7 +23,7 @@ def choose_non_null(row, key=None):
 def fix_standort(hygiene_df):
     for k in ('so', 'name', 'plz', 'ort', 'strasse', 'hausnr'):
         hygiene_df[k] = hygiene_df.apply(functools.partial(choose_non_null, key=k), 1)
-        hygiene_df = hygiene_df.drop(['%s_kh' % k, '%s_standort' % k], 1)
+        hygiene_df = hygiene_df.drop(['%s_kh' % k, '%s_standort' % k], axis=1)
 
     hygiene_df['year'] = hygiene_df['path_year']
     hygiene_df['ik-so'] = hygiene_df.apply(lambda x: '%s-%s' % (str(x['path_ik']), str(x['path_so'])), 1)
